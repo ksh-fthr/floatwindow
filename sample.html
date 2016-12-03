@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang='ja'>
+  <head>
+    <meta charset='utf-8'>
+    <link rel='stylesheet' href='./css/floatWindow.css'>
+    <script type='text/javascript' src='./script/floatWindow.js'></script>
+    <script type='text/javascript'>
+      function initialize() {
+        var fw = new FloatWindow(document.body, 'HEADER', 'CONTENTS', '<input id="_footer_button" type=button value=OK>');
+        fw.show();
+      }
+    </script>
+  </head>
+  <body onload='initialize()'></body>
+</html>

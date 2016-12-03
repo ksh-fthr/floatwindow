@@ -1,0 +1,49 @@
+body {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: azure;
+  z-index: 1000;
+}
+
+/* フロートウィンドウの初期設定値 */
+#_float_window {
+  position: absolute;
+  overflow: hidden;
+  height: 200px;
+  width: 400px;
+  margin: auto;
+  background-color: beige;
+  border: solid 1px rgb(0, 0, 0);
+  cursor: move;
+  display: none;
+  z-index: 1001;
+}
+
+/* ヘッダの初期設定値 */
+#_header {
+  height: 20%;
+  width: 100%;
+  background-color: cornflowerblue;
+  border-bottom: solid 1px rgb(0, 0, 0);
+  cursor: move;
+}
+
+/* コンテンツの初期設定値 */
+#_contents {
+  height: 60%;
+  width: 100%;
+  border-bottom: solid 1px rgb(0, 0, 0);
+  cursor: move;
+}
+
+/* フッタの初期設定値 */
+#_footer {
+  height: 20%;
+  width: 100%;
+  border-bottom: solid 1px rgb(0, 0, 0);
+  cursor: move;
+}
