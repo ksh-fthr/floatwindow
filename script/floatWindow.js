@@ -205,5 +205,11 @@ var FloatWindow = function(parent, title, contents, footer) {
         _float_window.style.display = 'none';
     };
 
+    /**
+     * フロートウィンドウのドラッグ＆ドロップを制御する
+     */
+    this.controlDnD = function(isDrag) {
+      _float_window.draggable = isDrag;
+    }
     return this;
 };
