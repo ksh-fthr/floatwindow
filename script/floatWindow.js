@@ -207,6 +207,8 @@ var FloatWindow = function(parent, title, contents, footer) {
 
     /**
      * フロートウィンドウのドラッグ＆ドロップを制御する
+     * @param {isDrag} - ドラッグの有無
+     * @return {undefined}
      */
     this.controlDnD = function(isDrag) {
       _float_window.draggable = isDrag;
