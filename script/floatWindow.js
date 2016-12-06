@@ -212,6 +212,6 @@ var FloatWindow = function(parent, title, contents, footer) {
      */
     this.isDraggable = function(isDrag) {
       _float_window.draggable = isDrag;
-    }
+    };
     return this;
 };
