@@ -210,7 +210,7 @@ var FloatWindow = function(parent, title, contents, footer) {
      * @param {isDrag} - ドラッグの有無
      * @return {undefined}
      */
-    this.controlDnD = function(isDrag) {
+    this.isDraggable = function(isDrag) {
       _float_window.draggable = isDrag;
     }
     return this;
