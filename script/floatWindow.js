@@ -1,5 +1,6 @@
 /**
  * フロートウィンドウの表示
+ * @constructor
  * @param {Object} parent - フロートウィンドウを乗せる親のDOM
  * @param {string} title - フロートウィンドウのタイトル
  * @param {string/Object} contents - フロートウィンドウのコンテンツに乗せる文字列 or DOM
@@ -10,7 +11,35 @@ var FloatWindow = function(parent, title, contents, footer) {
     //この関数はstrictモードで動作
     'use strict';
 
-    var _parent, _float_window, _header, _contents, _footer, _is_restrict;
+    /**
+     * @private {Object} - フロートウィンドウの親要素
+     */
+    var parent_;
+    /**
+     * @private {Object} - フロートウィンドウ
+     *
+     */
+    var float_window_;
+    /**
+     * @private {Object} - フロートウィンドウのヘッダ
+     *
+     */
+    var header_;
+    /**
+     * @private {Object} - フロートウィンドウのコンテンツ
+     *
+     */
+    var contents_;
+    /**
+     * @private {Object} - フロートウィンドウのフッタ
+     *
+     */
+    var footer_;
+    /**
+     * @private {Object} - フロートウィンドウの移動範囲を制限するか
+     *
+     */
+    var is_restrict_move_range_;
 
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // コンストラクタとしての処理
@@ -24,7 +53,7 @@ var FloatWindow = function(parent, title, contents, footer) {
         return;
     }
 
-    _initialize();
+    initialize_();
 
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // イベントハンドラ
@@ -35,7 +64,7 @@ var FloatWindow = function(parent, title, contents, footer) {
      * ドラッグ開始
      * @param {Object} evt - イベント情報
      */
-    _float_window.addEventListener('dragstart', function(evt) {
+    float_window_.addEventListener('dragstart', function(evt) {
         // ドラッグをしてもいいオブジェクトか、エレメントから判断
         if (evt.srcElement.className === "") {
             return;
@@ -53,7 +82,7 @@ var FloatWindow = function(parent, title, contents, footer) {
      * ドラッグ中
      * @param {Object} evt - イベント情報
      */
-    _parent.addEventListener('dragover', function(evt) {
+    parent_.addEventListener('dragover', function(evt) {
         // dragoverイベントをキャンセルして、ドロップ先の要素がドロップを受け付けるようにする
         evt.preventDefault();
         evt.dataTransfer.dropEffect = 'move';
@@ -63,7 +92,7 @@ var FloatWindow = function(parent, title, contents, footer) {
      * ドロップ(ドラッグ終了)
      * @param {Object} evt - イベント情報
      */
-    _parent.addEventListener('drop', function drop(evt) {
+    parent_.addEventListener('drop', function drop(evt) {
         evt.preventDefault();
         var id = evt.dataTransfer.getData('text');
         var target = document.getElementById(id);
@@ -75,8 +104,8 @@ var FloatWindow = function(parent, title, contents, footer) {
         target.style.left = evt.clientX - _offset_x + 'px';
         target.style.top = evt.clientY - _offset_y + 'px';
 
-        if(_is_restrict) {
-          _restrict_move_range(target);
+        if(is_restrict_move_range_) {
+          restrict_move_range_(target);
         }
     }, false);
 
@@ -85,77 +114,83 @@ var FloatWindow = function(parent, title, contents, footer) {
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     /**
      * 本クラスの初期化を担当. フロートウィンドウの生成を行う
+     * @private
      */
-    function _initialize() {
-        _createHeader();
-        _createContents();
-        _createFooter();
-        _createFloatWindow();
+    function initialize_() {
+        createHeader_();
+        createContents_();
+        createFooter_();
+        createFloatWindow_();
     }
 
     /**
      * フロートウィンドウのヘッダ部生成
+     * @private
      */
-    function _createHeader() {
-        _header = document.createElement('div');
-        _header.id = '_header';
-        _header.innerHTML = title;
+    function createHeader_() {
+        header_ = document.createElement('div');
+        header_.id = '_header';
+        header_.innerHTML = title;
     }
 
     /**
      * フロートウィンドウのコンテンツ部生成
+     * @private
      */
-    function _createContents() {
-        _contents = document.createElement('div');
-        _contents.id = '_contents';
+    function createContents_() {
+        contents_ = document.createElement('div');
+        contents_.id = '_contents';
 
         if (typeof contents === 'string') {
-            _contents.innerHTML = contents;
+            contents_.innerHTML = contents;
         } else if (typeof contents === 'object' && (contents instanceof HTMLElement) === true) {
-            _contents.appendChild(contents);
+            contents_.appendChild(contents);
         }
     }
 
     /**
      * フロートウィンドウのフッタ部生成
+     * @private
      */
-    function _createFooter() {
-        _footer = document.createElement('div');
-        _footer.id = '_footer';
+    function createFooter_() {
+        footer_ = document.createElement('div');
+        footer_.id = '_footer';
 
         if (typeof footer === 'string') {
-            _footer.innerHTML = footer;
+            footer_.innerHTML = footer;
         } else if (typeof footer === 'object' && (footer instanceof HTMLElement) === true) {
-            _footer.appendChild(footer);
+            footer_.appendChild(footer);
         }
     }
 
     /**
      * フロートウィンドウの本体生成
+     * @private
      */
-    function _createFloatWindow() {
-        _float_window = document.createElement('div');
-        _float_window.className = "_float_window";
-        _float_window.id = '_float_window';
-        _float_window.draggable = true;
-        _float_window.style.top = ((window.innerHeight / 3) + (50)) + "px";
-        _float_window.style.left = ((window.innerWidth / 2 - 250) + (50)) + "px";
+    function createFloatWindow_() {
+        float_window_ = document.createElement('div');
+        float_window_.className = "_float_window";
+        float_window_.id = '_float_window';
+        float_window_.draggable = true;
+        float_window_.style.top = ((window.innerHeight / 3) + (50)) + "px";
+        float_window_.style.left = ((window.innerWidth / 2 - 250) + (50)) + "px";
 
-        _float_window.appendChild(_header);
-        _float_window.appendChild(_contents);
-        _float_window.appendChild(_footer);
+        float_window_.appendChild(header_);
+        float_window_.appendChild(contents_);
+        float_window_.appendChild(footer_);
 
         // フロートウィンドウを親要素に乗っける
-        _parent = parent;
-        _parent.appendChild(_float_window);
+        parent_ = parent;
+        parent_.appendChild(float_window_);
     }
 
     /**
      * 対象の要素に対して、移動範囲を制御する.
      * ブラウザの上下左右の端から「10px」分内側までを移動範囲とする
+     * @private
      * @param  {[type]} element 制限対象の要素
      */
-    function _restrict_move_range(element) {
+    function restrict_move_range_(element) {
       var rect = element.getBoundingClientRect();
       var adjustmentValue = 10;
       var compareWidth = window.innerWidth;
@@ -203,22 +238,25 @@ var FloatWindow = function(parent, title, contents, footer) {
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     /**
      * フロートウィンドウの幅を設定する
+     * @public
      * @param {number} width - フロートウィンドウの幅
      */
     this.setWidth = function(width) {
-        _float_window.style.width = width + 'px';
+        float_window_.style.width = width + 'px';
     };
 
     /**
      * フロートウィンドウの高さを設定する
+     * @public
      * @param {number} height - フロートウィンドウの幅
      */
     this.setHeight = function(height) {
-        _float_window.style.height = height + 'px';
+        float_window_.style.height = height + 'px';
     };
 
     /**
      * フロートウィンドウの背景色を設定する
+     * @public
      * @param {string} header_bg - ヘッダ背景色
      * @param {string} contents_bg - コンテンツ背景色
      * @param {string} footer_bg - フッタ背景色
@@ -229,43 +267,47 @@ var FloatWindow = function(parent, title, contents, footer) {
             return;
         }
 
-        _header.style.backgroundColor = header_bg;
-        _contents.style.backgroundColor = contents_bg;
-        _footer.style.backgroundColor = footer_bg;
+        header_.style.backgroundColor = header_bg;
+        contents_.style.backgroundColor = contents_bg;
+        footer_.style.backgroundColor = footer_bg;
     };
 
     /**
      * フロートウィンドウを表示する
+     * @public
      * @return {undefined}
      */
     this.show = function() {
-        _float_window.style.display = 'block';
+        float_window_.style.display = 'block';
     };
 
     /**
      * フロートウィンドウを非表示にする
+     * @public
      * @return {undefined}
      */
     this.hide = function() {
-        _float_window.style.display = 'none';
+        float_window_.style.display = 'none';
     };
 
     /**
      * フロートウィンドウのドラッグ＆ドロップを制御する
+     * @public
      * @param  {Boolean} is_drag ドラッグの有無
      * @return {Boolean}         true/ドラッグ可能, false/ドラッグ不能
      */
     this.isDraggable = function(is_drag) {
-      _float_window.draggable = is_drag;
+      float_window_.draggable = is_drag;
     };
 
     /**
      * フロートウインドウの移動範囲を制限する
+     * @public
      * @param  {Boolean} is_restrict - 移動範囲を制限するか否か
      * @return {Boolean}               true/制限する, false/制限しない
      */
     this.isRestrictMoveRange = function(is_restrict) {
-      _is_restrict = is_restrict;
+      is_restrict_move_range_ = is_restrict;
     };
 
     return this;
