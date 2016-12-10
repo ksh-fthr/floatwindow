@@ -66,7 +66,7 @@ var FloatWindow = function(parent, title, contents, footer) {
      */
     float_window_.addEventListener('dragstart', function(evt) {
         // ドラッグをしてもいいオブジェクトか、エレメントから判断
-        if (evt.srcElement.className === "") {
+        if (evt.target.className === "") {
             return;
         }
 
