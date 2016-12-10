@@ -10,7 +10,7 @@ var FloatWindow = function(parent, title, contents, footer) {
     //この関数はstrictモードで動作
     'use strict';
 
-    var _parent, _float_window, _header, _contents, _footer;
+    var _parent, _float_window, _header, _contents, _footer, _is_restrict;
 
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // コンストラクタとしての処理
@@ -33,17 +33,10 @@ var FloatWindow = function(parent, title, contents, footer) {
 
     /**
      * ドラッグ開始
-     * @param {evt} evt - イベント情報
+     * @param {Object} evt - イベント情報
      */
     _float_window.addEventListener('dragstart', function(evt) {
         // ドラッグをしてもいいオブジェクトか、エレメントから判断
-        // これをやらないとポップアップ内のメッセージ選択時に、グレーエリアがドラッグされてしまう
-        //  if (evt.srcElement.id !== '_float_window' &&
-        //      evt.srcElement.id !== '_header' &&
-        //      evt.srcElement.id !== '_contents' &&
-        //      evt.srcElement.id !== '_footer') {
-        //      return;
-        //  }
         if (evt.srcElement.className === "") {
             return;
         }
@@ -58,7 +51,7 @@ var FloatWindow = function(parent, title, contents, footer) {
 
     /**
      * ドラッグ中
-     * @param {evt} evt - イベント情報
+     * @param {Object} evt - イベント情報
      */
     _parent.addEventListener('dragover', function(evt) {
         // dragoverイベントをキャンセルして、ドロップ先の要素がドロップを受け付けるようにする
@@ -68,7 +61,7 @@ var FloatWindow = function(parent, title, contents, footer) {
 
     /**
      * ドロップ(ドラッグ終了)
-     * @param {evt} evt - イベント情報
+     * @param {Object} evt - イベント情報
      */
     _parent.addEventListener('drop', function drop(evt) {
         evt.preventDefault();
@@ -81,6 +74,10 @@ var FloatWindow = function(parent, title, contents, footer) {
         // ドロップ時のオブジェクトの位置と退避した元の位置から配置先を計算
         target.style.left = evt.clientX - _offset_x + 'px';
         target.style.top = evt.clientY - _offset_y + 'px';
+
+        if(_is_restrict) {
+          _restrict_move_range(target);
+        }
     }, false);
 
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -153,6 +150,54 @@ var FloatWindow = function(parent, title, contents, footer) {
         _parent.appendChild(_float_window);
     }
 
+    /**
+     * 対象の要素に対して、移動範囲を制御する.
+     * ブラウザの上下左右の端から「10px」分内側までを移動範囲とする
+     * @param  {[type]} element 制限対象の要素
+     */
+    function _restrict_move_range(element) {
+      var rect = element.getBoundingClientRect();
+      var adjustmentValue = 10;
+      var compareWidth = window.innerWidth;
+      var compareHeight = window.innerHeight;
+
+      // 上端と左端/右端の制御
+      if(rect.top < adjustmentValue) {
+        element.style.top = adjustmentValue + "px";
+        if(rect.left < adjustmentValue) {
+          element.style.left = adjustmentValue + "px";
+        }
+        else if(rect.left + element.offsetWidth > compareWidth - adjustmentValue) {
+          element.style.left = compareWidth - element.offsetWidth - (adjustmentValue*2) + "px";
+        }
+        return;
+      }
+
+      // 下端と左端/右端の制御
+      if(rect.top + element.offsetHeight > compareHeight - adjustmentValue) {
+        element.style.top = compareHeight - element.offsetHeight - (adjustmentValue*2) + "px";
+        if(rect.left < adjustmentValue) {
+          element.style.left = adjustmentValue + "px";
+        }
+        else if(rect.left + element.offsetWidth > compareWidth - adjustmentValue) {
+          element.style.left = compareWidth - element.offsetWidth - (adjustmentValue*2) + "px";
+        }
+        return;
+      }
+
+      // 上記までだと、単純な左端と右端の制御が漏れるので対応する
+      if(rect.left < adjustmentValue) {
+        element.style.left = adjustmentValue + "px";
+        return;
+      }
+      if(rect.left + element.offsetWidth > compareWidth - adjustmentValue) {
+        element.style.left = compareWidth - element.offsetWidth - (adjustmentValue*2) + "px";
+        return;
+      }
+
+      return;
+    }
+
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // 外部メソッド(API)
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -174,19 +219,19 @@ var FloatWindow = function(parent, title, contents, footer) {
 
     /**
      * フロートウィンドウの背景色を設定する
-     * @param {headerBg} - ヘッダ背景色
-     * @param {contentsBg} - コンテンツ背景色
-     * @param {footerBg} - フッタ背景色
+     * @param {string} header_bg - ヘッダ背景色
+     * @param {string} contents_bg - コンテンツ背景色
+     * @param {string} footer_bg - フッタ背景色
      */
-    this.setBgColor = function(headerBg, contentsBg, footerBg) {
-        if (typeof headerBg !== 'string' || typeof contentsBg !== 'string' || typeof footerBg !== 'string') {
-            console.log('param: headerBg, contentsBg, footerBg expect String');
+    this.setBgColor = function(header_bg, contents_bg, footer_bg) {
+        if (typeof header_bg !== 'string' || typeof contents_bg !== 'string' || typeof footer_bg !== 'string') {
+            console.log('param: header_bg, contents_bg, footer_bg expect string');
             return;
         }
 
-        _header.style.backgroundColor = headerBg;
-        _contents.style.backgroundColor = contentsBg;
-        _footer.style.backgroundColor = footerBg;
+        _header.style.backgroundColor = header_bg;
+        _contents.style.backgroundColor = contents_bg;
+        _footer.style.backgroundColor = footer_bg;
     };
 
     /**
@@ -207,11 +252,21 @@ var FloatWindow = function(parent, title, contents, footer) {
 
     /**
      * フロートウィンドウのドラッグ＆ドロップを制御する
-     * @param {isDrag} - ドラッグの有無
-     * @return {undefined}
+     * @param  {Boolean} is_drag ドラッグの有無
+     * @return {Boolean}         true/ドラッグ可能, false/ドラッグ不能
      */
-    this.isDraggable = function(isDrag) {
-      _float_window.draggable = isDrag;
+    this.isDraggable = function(is_drag) {
+      _float_window.draggable = is_drag;
     };
+
+    /**
+     * フロートウインドウの移動範囲を制限する
+     * @param  {Boolean} is_restrict - 移動範囲を制限するか否か
+     * @return {Boolean}               true/制限する, false/制限しない
+     */
+    this.isRestrictMoveRange = function(is_restrict) {
+      _is_restrict = is_restrict;
+    };
+
     return this;
 };
