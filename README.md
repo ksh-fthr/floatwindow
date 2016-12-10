@@ -20,13 +20,13 @@ API
 ## v0.0.3
 現在、次のAPIを提供しています.
 
-### setWidth()
+### setWidth(width)
 * フロートウィンドウの幅を設定する.
 
-### setHeight()
+### setHeight(height)
 * フロートウィンドウの高さを設定する.
 
-### setBgColor(headerBg, contentsBg, footerBg)
+### setBgColor(header_bg, contents_bg, footer_bg)
 * フロートウィンドウのヘッダ、コンテンツ、フッタの各背景色を設定する.
 
 ### show()
@@ -35,12 +35,12 @@ API
 ### hide()
 * フロートウィンドウを非表示にする.
 
-### isDraggable()
+### isDraggable(is_drag)
 * フロートウィンドウに対してDrag & DropのON/OFFを設定する.
- * ONの場合, フロートウィンドウの移動ができる
- * OFFの場合, フロートウィンドウの移動ができない
+ * ON(is_drag == true)の場合, フロートウィンドウの移動ができる
+ * OFF(is_drag == false)の場合, フロートウィンドウの移動ができない
 
-### isRestrictMoveRange()
+### isRestrictMoveRange(is_restrict)
 * フロートウィンドウの移動範囲に対する制限のON/OFFを設定する.
- * ONの場合, ブラウザの領域から外れてフロートウィンドウが隠れないよう制限する
- * OFFの場合, ブラウザの領域内から外れてフロートウィンドウが隠れても移動できる
+ * ON(is_restrict == true)の場合, ブラウザの領域から外れてフロートウィンドウが隠れないよう制限する
+ * OFF(is_restrict == false)の場合, ブラウザの領域内から外れてフロートウィンドウが隠れても移動できる
