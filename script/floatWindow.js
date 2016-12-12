@@ -41,6 +41,16 @@ var FloatWindow = function(parent, title, contents, footer) {
      */
     var is_restrict_move_range_;
 
+    /**
+     * ドラッグ＆ドロップ時のX座標を保持する
+     */
+    var offset_x_;
+
+    /**
+    * ドラッグ＆ドロップ時のY座標を保持する
+     */
+    var offset_y_;
+
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // コンストラクタとしての処理
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -58,15 +68,13 @@ var FloatWindow = function(parent, title, contents, footer) {
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // イベントハンドラ
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-    var _offset_x, _offset_y;
-
     /**
      * ドラッグ開始
      * @param {Object} evt - イベント情報
      */
     float_window_.addEventListener('dragstart', function(evt) {
         // ドラッグをしてもいいオブジェクトか、エレメントから判断
-        if (evt.target.className === "") {
+        if (evt.target.id !== "_float_window") {
             return;
         }
 
@@ -74,8 +82,8 @@ var FloatWindow = function(parent, title, contents, footer) {
         evt.dataTransfer.setData('text', evt.target.id);
 
         // 現在位置(ドラッグ開始時の位置)を退避
-        _offset_x = evt.offsetX;
-        _offset_y = evt.offsetY;
+        offset_x_ = evt.offsetX;
+        offset_y_ = evt.offsetY;
     }, false);
 
     /**
@@ -101,8 +109,8 @@ var FloatWindow = function(parent, title, contents, footer) {
         }
 
         // ドロップ時のオブジェクトの位置と退避した元の位置から配置先を計算
-        target.style.left = evt.clientX - _offset_x + 'px';
-        target.style.top = evt.clientY - _offset_y + 'px';
+        target.style.left = evt.clientX - offset_x_ + 'px';
+        target.style.top = evt.clientY - offset_y_ + 'px';
 
         if(is_restrict_move_range_) {
           restrict_move_range_(target);
@@ -169,7 +177,6 @@ var FloatWindow = function(parent, title, contents, footer) {
      */
     function createFloatWindow_() {
         float_window_ = document.createElement('div');
-        float_window_.className = "_float_window";
         float_window_.id = '_float_window';
         float_window_.draggable = true;
         float_window_.style.top = ((window.innerHeight / 3) + (50)) + "px";
