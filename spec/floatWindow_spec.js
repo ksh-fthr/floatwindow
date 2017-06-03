@@ -61,4 +61,14 @@ describe('Test floatWindow', function() {
     var fw_element_ = document.getElementById('_float_window');
     expect(fw_element_.draggable).toBe(false);
   });
+
+  it('isRestrictMoveRange(true)の確認', function() {
+    fw_.isRestrictMoveRange(true);
+    expect(fw_.is_restrict_move_range_).toBe(true);
+  });
+
+  it('isRestrictMoveRange(false)の確認', function() {
+    fw_.isRestrictMoveRange(false);
+    expect(fw_.is_restrict_move_range_).toBe(false);
+  });
 });
