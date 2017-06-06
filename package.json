@@ -7,10 +7,17 @@
     "karma": "^1.7.0"
   },
   "devDependencies": {
+    "@types/jasmine": "^2.5.51",
     "jasmine-core": "^2.6.2",
+    "karma": "^1.7.0",
     "karma-chrome-launcher": "^2.1.1",
     "karma-html2js-preprocessor": "^1.1.0",
-    "karma-jasmine": "^1.1.0"
+    "karma-jasmine": "^1.1.0",
+    "karma-typescript-preprocessor": "^0.3.1",
+    "karma-webpack": "^2.0.3",
+    "ts-loader": "^2.1.0",
+    "typescript": "^2.3.4",
+    "webpack": "^2.6.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
