@@ -53,7 +53,7 @@ export class FloatWindow {
    * @param {string/Object} footer - フロートウィンドウのフッタに乗せる文字列 or DOM
    */
   constructor(parent, title, contents, footer) {
-    //この関数はstrictモードで動作
+    // この関数はstrictモードで動作
     'use strict';
 
     const self: FloatWindow = this;
@@ -99,8 +99,8 @@ export class FloatWindow {
     self.float_window_ = document.createElement('div');
     self.float_window_.id = '_float_window';
     self.float_window_.draggable = true;
-    self.float_window_.style.top = ((window.innerHeight / 3) + (50)) + "px";
-    self.float_window_.style.left = ((window.innerWidth / 2 - 250) + (50)) + "px";
+    self.float_window_.style.top = ((window.innerHeight / 3) + (50)) + 'px';
+    self.float_window_.style.left = ((window.innerWidth / 2 - 250) + (50)) + 'px';
 
     self.float_window_.appendChild(self.header_);
     self.float_window_.appendChild(self.contents_);
@@ -119,7 +119,7 @@ export class FloatWindow {
      */
     self.float_window_.addEventListener('dragstart', function(evt) {
       // ドラッグをしてもいいオブジェクトか、エレメントから判断
-      if (evt.target.id !== "_float_window") {
+      if (evt.target.id !== '_float_window') {
         return;
       }
 
@@ -170,42 +170,40 @@ export class FloatWindow {
    * @param  {[type]} element 制限対象の要素
    */
   public restrict_move_range_(element): void {
-    var rect = element.getBoundingClientRect();
-    var adjustmentValue = 10;
-    var compareWidth = window.innerWidth;
-    var compareHeight = window.innerHeight;
+    const rect = element.getBoundingClientRect();
+    const adjustmentValue = 10;
+    const compareWidth = window.innerWidth;
+    const compareHeight = window.innerHeight;
 
     // 上端と左端/右端の制御
     if(rect.top < adjustmentValue) {
-      element.style.top = adjustmentValue + "px";
+      element.style.top = adjustmentValue + 'px';
       if(rect.left < adjustmentValue) {
-        element.style.left = adjustmentValue + "px";
-      }
-      else if(rect.left + element.offsetWidth > compareWidth - adjustmentValue) {
-        element.style.left = compareWidth - element.offsetWidth - (adjustmentValue*2) + "px";
+        element.style.left = adjustmentValue + 'px';
+      } else if(rect.left + element.offsetWidth > compareWidth - adjustmentValue) {
+        element.style.left = compareWidth - element.offsetWidth - (adjustmentValue*2) + 'px';
       }
       return;
     }
 
     // 下端と左端/右端の制御
     if(rect.top + element.offsetHeight > compareHeight - adjustmentValue) {
-      element.style.top = compareHeight - element.offsetHeight - (adjustmentValue*2) + "px";
+      element.style.top = compareHeight - element.offsetHeight - (adjustmentValue * 2) + 'px';
       if(rect.left < adjustmentValue) {
-        element.style.left = adjustmentValue + "px";
-      }
-      else if(rect.left + element.offsetWidth > compareWidth - adjustmentValue) {
-        element.style.left = compareWidth - element.offsetWidth - (adjustmentValue*2) + "px";
+        element.style.left = adjustmentValue + 'px';
+      } else if(rect.left + element.offsetWidth > compareWidth - adjustmentValue) {
+        element.style.left = compareWidth - element.offsetWidth - (adjustmentValue * 2) + 'px';
       }
       return;
     }
 
     // 上記までだと、単純な左端と右端の制御が漏れるので対応する
     if(rect.left < adjustmentValue) {
-      element.style.left = adjustmentValue + "px";
+      element.style.left = adjustmentValue + 'px';
       return;
     }
     if(rect.left + element.offsetWidth > compareWidth - adjustmentValue) {
-      element.style.left = compareWidth - element.offsetWidth - (adjustmentValue*2) + "px";
+      element.style.left = compareWidth - element.offsetWidth - (adjustmentValue * 2) + 'px';
       return;
     }
 

@@ -2,7 +2,7 @@
   "name": "floatwindow",
   "version": "1.0.0",
   "description": "はじめに\r -------------------------------------------------------------\r FloatWindow は動的にフロートウィンドウを生成するライブラリです.",
-  "main": "karma.conf.js",
+  "main": "index.ts",
   "dependencies": {
     "karma": "^1.7.0"
   },
