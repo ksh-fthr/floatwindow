@@ -1,11 +1,16 @@
+/// <reference path="./spec.d.ts" />
+
+import { FloatWindow } from '../src/floatWindow';
+
 describe('Test floatWindow', function() {
 
   var fw_obj_;
+  var fw_;
 
   // 初期化処理
   beforeEach(function() {
     // テスト準備としてHTMLを読み込む
-    document.body.innerHTML = window.__html__['sample.html'];
+    document.body.innerHTML = __html__['sample.html'];
     // 上記コードではHTMLが読み込まれただけなのでテスト対象のオブジェクトはここで生成する
     fw_ = new FloatWindow(document.body, 'HEADER', 'CONTENTS', '<input id="_footer_button" type=button value=OK>');
   });
