@@ -6,10 +6,6 @@ CUR_DIR=`pwd`
 # npm のインストール
 sudo apt-get install npm
 
-# node が存在しないせいでPATHエラーとなるのでシンボリックリンクを貼る
-cd /usr/bin/
-sudo ln -s nodejs node
-
 # karma のインストール
 # プロジェクトは 下記にあると想定して動く
 cd $CUR_DIR
