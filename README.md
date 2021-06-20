@@ -76,6 +76,7 @@ $ npm run test
 
 ## テスト結果
 ブラウザが起動し次の画面が表示されます｡
+<img width="1200" alt="スクリーンショット 2021-06-20 22 22 33" src="https://user-images.githubusercontent.com/3907225/122675965-d899be80-d216-11eb-85d1-4033a21cddf8.png">
 
 テストを実行したターミナルには次のログが出ているはずです｡
 (以下は `Chrome 91.0.4472 (Mac OS X 10.15.7)` の環境で実施した結果です)
