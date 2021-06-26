@@ -21,15 +21,15 @@ var FloatWindow = function FloatWindow(parent, title, contents, footer) {
   /**
    * @private {Object} - フロートウィンドウの親要素
    */
-  var parent_;
+  var _parent;
   /**
    * @private {number} - ドラッグ＆ドロップ時のX座標を保持する
    */
-  var offset_x_;
+  var _offset_x;
   /**
    * @private {number} - ドラッグ＆ドロップ時のY座標を保持する
    */
-  var offset_y_;
+  var _offset_y;
 
   // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   // メンバ変数
@@ -38,26 +38,26 @@ var FloatWindow = function FloatWindow(parent, title, contents, footer) {
    * @param {Object} - フロートウィンドウ
    * @memberof FloatWindow
    */
-  self.float_window_;
+  self._float_window;
   /**
    * @param {Object} - フロートウィンドウのヘッダ
    * @memberof FloatWindow
    */
-  self.header_;
+  self._header;
   /**
    * @param {Object} - フロートウィンドウのコンテンツ
    * @memberof FloatWindow
    */
-  self.contents_;
+  self._contents;
   /**
    * @private {Object} - フロートウィンドウのフッタ
    */
-  self.footer_;
+  self._footer;
   /**
    * @param {Object} - フロートウィンドウの移動範囲を制限するか
    * @memberof FloatWindow
    */
-  self.is_restrict_move_range_;
+  self._is_restrict_move_range;
 
   // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   // コンストラクタとしての処理
@@ -71,16 +71,18 @@ var FloatWindow = function FloatWindow(parent, title, contents, footer) {
     return;
   }
 
-  initialize_();
+  _initialize();
 
   // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-  // イベントハンドラ
+  // イベントハンドラに紐づく各処理
   // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   /**
-   * ドラッグ開始
-   * @param {Object} evt - イベント情報
+   * ドラッグ開始時のイベント処理
+   * 
+   * @param {*} evt 
+   * @returns null
    */
-  self.float_window_.addEventListener('dragstart', function(evt) {
+  const dragstart = (evt) => {
     // ドラッグをしてもいいオブジェクトか、エレメントから判断
     if (evt.target.id !== "_float_window") {
       return;
@@ -90,25 +92,32 @@ var FloatWindow = function FloatWindow(parent, title, contents, footer) {
     evt.dataTransfer.setData('text', evt.target.id);
 
     // 現在位置(ドラッグ開始時の位置)を退避
-    offset_x_ = evt.offsetX;
-    offset_y_ = evt.offsetY;
-  }, false);
+    _offset_x = evt.offsetX;
+    _offset_y = evt.offsetY;
+
+    return null;
+  }
 
   /**
-   * ドラッグ中
-   * @param {Object} evt - イベント情報
+   * ドラッグしている最中のイベント処理
+   * 
+   * @param {*} evt 
+   * @returns null
    */
-  parent_.addEventListener('dragover', function(evt) {
+  const dragover = (evt) => {
     // dragoverイベントをキャンセルして、ドロップ先の要素がドロップを受け付けるようにする
     evt.preventDefault();
     evt.dataTransfer.dropEffect = 'move';
-  }, false);
+    return null;
+  }
 
   /**
-   * ドロップ(ドラッグ終了)
-   * @param {Object} evt - イベント情報
+   * ドラッグ終了時のイベント処理
+   * 
+   * @param {*} evt 
+   * @returns null
    */
-  parent_.addEventListener('drop', function(evt) {
+  const drop = (evt) => {
     evt.preventDefault();
     var id = evt.dataTransfer.getData('text');
     var target = document.getElementById(id);
@@ -117,13 +126,35 @@ var FloatWindow = function FloatWindow(parent, title, contents, footer) {
     }
 
     // ドロップ時のオブジェクトの位置と退避した元の位置から配置先を計算
-    target.style.left = evt.clientX - offset_x_ + 'px';
-    target.style.top = evt.clientY - offset_y_ + 'px';
+    target.style.left = evt.clientX - _offset_x + 'px';
+    target.style.top = evt.clientY - _offset_y + 'px';
 
-    if(self.is_restrict_move_range_) {
+    if(self._is_restrict_move_range) {
       restrict_move_range_(target);
     }
-  }, false);
+    return null;
+  }
+ 
+  // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  // イベントハンドラの設定
+  // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  /**
+   * ドラッグ開始
+   * @param {Object} evt - イベント情報
+   */
+  self._float_window.addEventListener('dragstart', dragstart, false);
+
+  /**
+   * ドラッグ中
+   * @param {Object} evt - イベント情報
+   */
+  _parent.addEventListener('dragover', dragover, false);
+
+  /**
+   * ドロップ(ドラッグ終了)
+   * @param {Object} evt - イベント情報
+   */
+  _parent.addEventListener('drop', drop, false);
 
   // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   // 内部メソッド
@@ -132,10 +163,10 @@ var FloatWindow = function FloatWindow(parent, title, contents, footer) {
    * 本クラスの初期化を担当. フロートウィンドウの生成を行う
    * @private
    */
-  function initialize_() {
-    createHeader_();
-    createContents_();
-    createFooter_();
+  function _initialize() {
+    create_header();
+    create_contents();
+    create_footer();
     createFloatWindow_();
   }
 
@@ -143,24 +174,24 @@ var FloatWindow = function FloatWindow(parent, title, contents, footer) {
    * フロートウィンドウのヘッダ部生成
    * @private
    */
-  function createHeader_() {
-    self.header_ = document.createElement('div');
-    self.header_.id = '_header';
-    self.header_.innerHTML = title;
+  function create_header() {
+    self._header = document.createElement('div');
+    self._header.id = '_header';
+    self._header.innerHTML = title;
   }
 
   /**
    * フロートウィンドウのコンテンツ部生成
    * @private
    */
-  function createContents_() {
-    self.contents_ = document.createElement('div');
-    self.contents_.id = '_contents';
+  function create_contents() {
+    self._contents = document.createElement('div');
+    self._contents.id = '_contents';
 
     if (typeof contents === 'string') {
-      self.contents_.innerHTML = contents;
+      self._contents.innerHTML = contents;
     } else if (typeof contents === 'object' && (contents instanceof HTMLElement) === true) {
-      self.contents_.appendChild(contents);
+      self._contents.appendChild(contents);
     }
   }
 
@@ -168,14 +199,14 @@ var FloatWindow = function FloatWindow(parent, title, contents, footer) {
    * フロートウィンドウのフッタ部生成
    * @private
    */
-  function createFooter_() {
-    self.footer_ = document.createElement('div');
-    self.footer_.id = '_footer';
+  function create_footer() {
+    self._footer = document.createElement('div');
+    self._footer.id = '_footer';
 
     if (typeof footer === 'string') {
-      self.footer_.innerHTML = footer;
+      self._footer.innerHTML = footer;
     } else if (typeof footer === 'object' && (footer instanceof HTMLElement) === true) {
-      self.footer_.appendChild(footer);
+      self._footer.appendChild(footer);
     }
   }
 
@@ -184,19 +215,19 @@ var FloatWindow = function FloatWindow(parent, title, contents, footer) {
    * @private
    */
   function createFloatWindow_() {
-    self.float_window_ = document.createElement('div');
-    self.float_window_.id = '_float_window';
-    self.float_window_.draggable = true;
-    self.float_window_.style.top = ((window.innerHeight / 3) + (50)) + "px";
-    self.float_window_.style.left = ((window.innerWidth / 2 - 250) + (50)) + "px";
+    self._float_window = document.createElement('div');
+    self._float_window.id = '_float_window';
+    self._float_window.draggable = true;
+    self._float_window.style.top = ((window.innerHeight / 3) + (50)) + "px";
+    self._float_window.style.left = ((window.innerWidth / 2 - 250) + (50)) + "px";
 
-    self.float_window_.appendChild(self.header_);
-    self.float_window_.appendChild(self.contents_);
-    self.float_window_.appendChild(self.footer_);
+    self._float_window.appendChild(self._header);
+    self._float_window.appendChild(self._contents);
+    self._float_window.appendChild(self._footer);
 
     // フロートウィンドウを親要素に乗っける
-    parent_ = parent;
-    parent_.appendChild(self.float_window_);
+    _parent = parent;
+    _parent.appendChild(self._float_window);
   }
 
   /**
@@ -263,7 +294,7 @@ var FloatWindow = function FloatWindow(parent, title, contents, footer) {
  */
 FloatWindow.prototype.setWidth = function setWidth(width) {
   const self = this;
-  self.float_window_.style.width = width + 'px';
+  self._float_window.style.width = width + 'px';
 };
 
 /**
@@ -274,27 +305,27 @@ FloatWindow.prototype.setWidth = function setWidth(width) {
  */
 FloatWindow.prototype.setHeight = function setHeight(height) {
   const self = this;
-  self.float_window_.style.height = height + 'px';
+  self._float_window.style.height = height + 'px';
 };
 
 /**
  * フロートウィンドウの背景色を設定する
  * @public
- * @param {string} header_bg - ヘッダ背景色
- * @param {string} contents_bg - コンテンツ背景色
- * @param {string} footer_bg - フッタ背景色
+ * @param {string} _headerbg - ヘッダ背景色
+ * @param {string} _contentsbg - コンテンツ背景色
+ * @param {string} _footerbg - フッタ背景色
  * @memberof FloatWindow
  */
-FloatWindow.prototype.setBgColor = function setBgColor(header_bg, contents_bg, footer_bg) {
+FloatWindow.prototype.setBgColor = function setBgColor(_headerbg, _contentsbg, _footerbg) {
   const self = this;
-  if (typeof header_bg !== 'string' || typeof contents_bg !== 'string' || typeof footer_bg !== 'string') {
-    console.log('param: header_bg, contents_bg, footer_bg expect string');
+  if (typeof _headerbg !== 'string' || typeof _contentsbg !== 'string' || typeof _footerbg !== 'string') {
+    console.log('param: _headerbg, _contentsbg, _footerbg expect string');
     return;
   }
 
-  self.header_.style.backgroundColor = header_bg;
-  self.contents_.style.backgroundColor = contents_bg;
-  self.footer_.style.backgroundColor = footer_bg;
+  self._header.style.backgroundColor = _headerbg;
+  self._contents.style.backgroundColor = _contentsbg;
+  self._footer.style.backgroundColor = _footerbg;
 };
 
 /**
@@ -305,7 +336,7 @@ FloatWindow.prototype.setBgColor = function setBgColor(header_bg, contents_bg, f
  */
 FloatWindow.prototype.show = function show() {
   const self = this;
-  self.float_window_.style.display = 'block';
+  self._float_window.style.display = 'block';
 };
 
 /**
@@ -316,7 +347,7 @@ FloatWindow.prototype.show = function show() {
  */
 FloatWindow.prototype.hide = function hide() {
   const self = this;
-  self.float_window_.style.display = 'none';
+  self._float_window.style.display = 'none';
 };
 
 /**
@@ -328,7 +359,7 @@ FloatWindow.prototype.hide = function hide() {
  */
 FloatWindow.prototype.isDraggable = function isDraggable(is_drag) {
   const self = this;
-  self.float_window_.draggable = is_drag;
+  self._float_window.draggable = is_drag;
 };
 
 /**
@@ -340,5 +371,5 @@ FloatWindow.prototype.isDraggable = function isDraggable(is_drag) {
  */
 FloatWindow.prototype.isRestrictMoveRange = function isRestrictMoveRange(is_restrict) {
   const self = this;
-  self.is_restrict_move_range_ = is_restrict;
+  self._is_restrict_move_range = is_restrict;
 };
