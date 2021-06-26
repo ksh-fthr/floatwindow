@@ -6,7 +6,7 @@
  * @param {string/Object} contents - フロートウィンドウのコンテンツに乗せる文字列 or DOM
  * @param {string/Object} footer - フロートウィンドウのフッタに乗せる文字列 or DOM
  */
-var FloatWindow = function FloatWindow(parent, title, contents, footer) {
+function FloatWindow(parent, title, contents, footer) {
 
   //この関数はstrictモードで動作
   'use strict';
@@ -21,15 +21,15 @@ var FloatWindow = function FloatWindow(parent, title, contents, footer) {
   /**
    * @private {Object} - フロートウィンドウの親要素
    */
-  var _parent;
+  let _parent;
   /**
    * @private {number} - ドラッグ＆ドロップ時のX座標を保持する
    */
-  var _offset_x;
+  let _offset_x;
   /**
    * @private {number} - ドラッグ＆ドロップ時のY座標を保持する
    */
-  var _offset_y;
+  let _offset_y;
 
   // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   // メンバ変数
@@ -119,8 +119,8 @@ var FloatWindow = function FloatWindow(parent, title, contents, footer) {
    */
   const drop = (evt) => {
     evt.preventDefault();
-    var id = evt.dataTransfer.getData('text');
-    var target = document.getElementById(id);
+    const id = evt.dataTransfer.getData('text');
+    const target = document.getElementById(id);
     if (target === null) {
       return;
     }
@@ -237,10 +237,10 @@ var FloatWindow = function FloatWindow(parent, title, contents, footer) {
    * @param  {[type]} element 制限対象の要素
    */
   function restrict_move_range_(element) {
-    var rect = element.getBoundingClientRect();
-    var adjustmentValue = 10;
-    var compareWidth = window.innerWidth;
-    var compareHeight = window.innerHeight;
+    const rect = element.getBoundingClientRect();
+    const adjustmentValue = 10;
+    const compareWidth = window.innerWidth;
+    const compareHeight = window.innerHeight;
 
     // 上端と左端/右端の制御
     if(rect.top < adjustmentValue) {
