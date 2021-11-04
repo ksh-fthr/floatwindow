@@ -61,11 +61,11 @@ function FloatWindow(parent, title, contents, footer) {
   // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   // コンストラクタとしての処理
   // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-  if(typeof parent !== 'object' || (parent instanceof HTMLElement) === false) {
+  if (typeof parent !== 'object' || (parent instanceof HTMLElement) === false) {
     console.log('param:parent expect HTMLElement.');
     return;
   }
-  if(typeof title !== 'string') {
+  if (typeof title !== 'string') {
     console.log('param:parent expect HTMLElement.');
     return;
   }
@@ -83,7 +83,7 @@ function FloatWindow(parent, title, contents, footer) {
    */
   const dragstart = (evt) => {
     // ドラッグをしてもいいオブジェクトか、エレメントから判断
-    if(evt.target.id !== '_float_window') {
+    if (evt.target.id !== '_float_window') {
       return;
     }
 
@@ -120,7 +120,7 @@ function FloatWindow(parent, title, contents, footer) {
     evt.preventDefault();
     const id = evt.dataTransfer.getData('text');
     const target = document.getElementById(id);
-    if(target === null) {
+    if (target === null) {
       return;
     }
 
@@ -128,7 +128,7 @@ function FloatWindow(parent, title, contents, footer) {
     target.style.left = evt.clientX - _offsetX + 'px';
     target.style.top = evt.clientY - _offsetY + 'px';
 
-    if(self._isRestrictMoveRange) {
+    if (self._isRestrictMoveRange) {
       restrictMoveRange(target);
     }
     return null;
@@ -187,9 +187,9 @@ function FloatWindow(parent, title, contents, footer) {
     self._contents = document.createElement('div');
     self._contents.id = '_contents';
 
-    if(typeof contents === 'string') {
+    if (typeof contents === 'string') {
       self._contents.innerHTML = contents;
-    }else if(typeof contents === 'object' && (contents instanceof HTMLElement) === true) {
+    } else if (typeof contents === 'object' && (contents instanceof HTMLElement) === true) {
       self._contents.appendChild(contents);
     }
   }
@@ -202,9 +202,9 @@ function FloatWindow(parent, title, contents, footer) {
     self._footer = document.createElement('div');
     self._footer.id = '_footer';
 
-    if(typeof footer === 'string') {
+    if (typeof footer === 'string') {
       self._footer.innerHTML = footer;
-    }else if(typeof footer === 'object' && (footer instanceof HTMLElement) === true) {
+    } else if (typeof footer === 'object' && (footer instanceof HTMLElement) === true) {
       self._footer.appendChild(footer);
     }
   }
@@ -242,33 +242,33 @@ function FloatWindow(parent, title, contents, footer) {
     const compareHeight = window.innerHeight;
 
     // 上端と左端/右端の制御
-    if(rect.top < adjustmentValue) {
+    if (rect.top < adjustmentValue) {
       element.style.top = adjustmentValue + 'px';
-      if(rect.left < adjustmentValue) {
+      if (rect.left < adjustmentValue) {
         element.style.left = adjustmentValue + 'px';
-      }else if(rect.left + element.offsetWidth > compareWidth - adjustmentValue) {
+      } else if (rect.left + element.offsetWidth > compareWidth - adjustmentValue) {
         element.style.left = compareWidth - element.offsetWidth - (adjustmentValue * 2) + 'px';
       }
       return;
     }
 
     // 下端と左端/右端の制御
-    if(rect.top + element.offsetHeight > compareHeight - adjustmentValue) {
+    if (rect.top + element.offsetHeight > compareHeight - adjustmentValue) {
       element.style.top = compareHeight - element.offsetHeight - (adjustmentValue * 2) + 'px';
-      if(rect.left < adjustmentValue) {
+      if (rect.left < adjustmentValue) {
         element.style.left = adjustmentValue + 'px';
-      }else if(rect.left + element.offsetWidth > compareWidth - adjustmentValue) {
+      } else if (rect.left + element.offsetWidth > compareWidth - adjustmentValue) {
         element.style.left = compareWidth - element.offsetWidth - (adjustmentValue * 2) + 'px';
       }
       return;
     }
 
     // 上記までだと、単純な左端と右端の制御が漏れるので対応する
-    if(rect.left < adjustmentValue) {
+    if (rect.left < adjustmentValue) {
       element.style.left = adjustmentValue + 'px';
       return;
     }
-    if(rect.left + element.offsetWidth > compareWidth - adjustmentValue) {
+    if (rect.left + element.offsetWidth > compareWidth - adjustmentValue) {
       element.style.left = compareWidth - element.offsetWidth - (adjustmentValue * 2) + 'px';
     }
   }
@@ -311,7 +311,7 @@ FloatWindow.prototype.setHeight = function setHeight(height) {
  */
 FloatWindow.prototype.setBgColor = function setBgColor(_headerbg, _contentsbg, _footerbg) {
   const self = this;
-  if(typeof _headerbg !== 'string' || typeof _contentsbg !== 'string' || typeof _footerbg !== 'string') {
+  if (typeof _headerbg !== 'string' || typeof _contentsbg !== 'string' || typeof _footerbg !== 'string') {
     console.log('param: _headerbg, _contentsbg, _footerbg expect string');
     return;
   }
