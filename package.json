@@ -7,17 +7,17 @@
     "karma": "^6.3.7"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
+    "eslint": "^8.2.0",
     "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "jasmine-core": "^2.99.1",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-firefox-launcher": "^2.1.1",
+    "eslint-plugin-promise": "^5.1.1",
+    "jasmine-core": "^3.10.1",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-firefox-launcher": "^2.1.2",
     "karma-html2js-preprocessor": "^1.1.0",
-    "karma-jasmine": "^1.1.2",
-    "nodemon": "^2.0.12"
+    "karma-jasmine": "^4.0.1",
+    "nodemon": "^2.0.14"
   },
   "scripts": {
     "test-prepare": "bash ./prepareTest.sh",
