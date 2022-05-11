@@ -1,5 +1,6 @@
+.tags
+.cache
 node_modules
 dist
-.cache
 *.swp
 
