@@ -366,3 +366,6 @@ FloatWindow.prototype.isRestrictMoveRange = function isRestrictMoveRange(isRestr
   const self = this;
   self._isRestrictMoveRange = isRestrict;
 };
+
+window.FloatWindow = FloatWindow;
+

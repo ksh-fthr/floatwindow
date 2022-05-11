@@ -1,19 +1,5 @@
 # はじめに
-FloatWindow は動的にフロートウィンドウを生成するライブラリです.
-
-# 更新履歴
-## v1.0.0
-* 単体テストコードを登録したのでメジャーバージョンを更新
-
-## v1.0.1
-* テスト準備用のスクリプト（prepareTest.sh)を実用可能なものに修正
-
-## v1.0.2
-* package.json を登録
-* 外部APIをprototype拡張とした
-
-## v1.0.3
-* 変数名やメソッド名､イベント処理の整理等､軽微なリファクタリングを実施
+本リポジトリは動的にフロートウィンドウを生成する実装を試すサンプルプログラムです.
 
 # 機能
 FloatWindow には以下の機能を設けています.
@@ -24,10 +10,30 @@ FloatWindow には以下の機能を設けています.
 4. 表示したフロートウィンドウのドラッグ＆ドロップ
 
 # 使い方
-sample.html をご参照ください.
+バンドラーに [parcel](https://ja.parceljs.org/) を使用しています。
+次の手順で実行してください。
+
+1. package.json で管理しているプラグインのインストール
+
+```bash
+$ npm i
+```
+
+2. アプリ起動
+
+```bash
+$ npm run dev 
+> floatwindow@1.0.0 dev /home/ksh/workspace/floatwindow
+> parcel sample.html
+
+Server running at http://localhost:1234 
+✨  Built in 815ms.
+```
+
+3. アクセス
+http://localhost:1234 にブラウザからアクセスするとフロートウィンドウの挙動が試せます。
 
 # 外部 I/F
-## v1.0.2
 現在、次の I/F を提供しています.
 
 ### setWidth(width)
