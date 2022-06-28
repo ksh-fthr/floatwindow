@@ -2,12 +2,11 @@
   "name": "floatwindow",
   "version": "1.0.0",
   "description": "はじめに\r -------------------------------------------------------------\r FloatWindow は動的にフロートウィンドウを生成するライブラリです.",
-  "main": "index.ts",
   "dependencies": {
-    "karma": "^6.3.19"
+    "karma": "^6.4.0"
   },
   "devDependencies": {
-    "eslint": "^8.15.0",
+    "eslint": "^8.18.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
@@ -18,7 +17,7 @@
     "karma-html2js-preprocessor": "^1.1.0",
     "karma-jasmine": "^4.0.2",
     "nodemon": "^2.0.16",
-    "parcel-bundler": "^1.12.5"
+    "parcel": "latest"
   },
   "scripts": {
     "dev": "parcel sample.html",
