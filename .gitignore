@@ -1,6 +1,6 @@
 .tags
 .cache
+.parcel-cache
 node_modules
 dist
 *.swp
-
