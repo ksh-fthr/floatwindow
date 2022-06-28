@@ -16,7 +16,6 @@
     "karma-firefox-launcher": "^2.1.2",
     "karma-html2js-preprocessor": "^1.1.0",
     "karma-jasmine": "^4.0.2",
-    "nodemon": "^2.0.16",
     "parcel": "latest"
   },
   "scripts": {
