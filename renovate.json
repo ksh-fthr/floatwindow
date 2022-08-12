@@ -15,6 +15,9 @@
   "constraints": {
     "node": "18.7.0"
   },
+   "major": {
+    "enabled": false
+  },
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
