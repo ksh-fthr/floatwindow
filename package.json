@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "はじめに\r -------------------------------------------------------------\r FloatWindow は動的にフロートウィンドウを生成するライブラリです.",
   "dependencies": {
-    "karma": "6.4.0"
+    "karma": "6.4.1"
   },
   "devDependencies": {
     "eslint": "8.23.1",
