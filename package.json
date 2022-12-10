@@ -1,16 +1,16 @@
 {
-  "name": "floatwindow",
+  "name": "html-javascript-work",
   "version": "1.0.0",
-  "description": "はじめに\r -------------------------------------------------------------\r FloatWindow は動的にフロートウィンドウを生成するライブラリです.",
+  "description": "本リポジトリは HTML5, CSS3, JavaScript(ES2015 以降) の学習用リポジトリです。",
   "dependencies": {
     "karma": "6.4.1"
   },
   "devDependencies": {
     "eslint": "8.29.0",
-    "eslint-config-standard": "16.0.3",
-    "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "5.2.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
     "jasmine-core": "3.99.1",
     "karma-chrome-launcher": "3.1.1",
     "karma-firefox-launcher": "2.1.2",
@@ -19,8 +19,8 @@
     "parcel": "latest"
   },
   "scripts": {
-    "dev": "parcel sample.html",
-    "build": "parcel build sample.html",
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
     "test-prepare": "bash ./prepareTest.sh",
     "test:ch": "karma start --browsers Chrome",
     "test:fx": "karma start --browsers Firefox",
@@ -28,12 +28,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ksh-fthr/floatWindow.git"
+    "url": "git+https://github.com/ksh-fthr/html-javascript-work.git"
   },
   "author": "ksh-fthr",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ksh-fthr/floatWindow/issues"
+    "url": "https://github.com/ksh-fthr/html-javascript-work/issues"
   },
-  "homepage": "https://github.com/ksh-fthr/floatWindow#readme"
+  "homepage": "https://github.com/ksh-fthr/html-javascript-work#readme"
 }

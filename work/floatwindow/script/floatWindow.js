@@ -368,4 +368,3 @@ FloatWindow.prototype.isRestrictMoveRange = function isRestrictMoveRange(isRestr
 };
 
 window.FloatWindow = FloatWindow;
-
