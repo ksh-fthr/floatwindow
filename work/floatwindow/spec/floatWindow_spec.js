@@ -4,7 +4,7 @@ describe('Test floatWindow', function() {
   // 初期化処理
   beforeEach(function() {
     // テスト準備としてHTMLを読み込む
-    document.body.innerHTML = window.__html__['../sample.html'];
+    document.body.innerHTML = window.__html__['../floatwindow.html'];
     // 上記コードではHTMLが読み込まれただけなのでテスト対象のオブジェクトはここで生成する
     // eslint-disable-next-line no-undef
     _fwObj = new FloatWindow(document.body, 'HEADER', 'CONTENTS', '<input id="_footer_button" type=button value=OK>');
