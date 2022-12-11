@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "本リポジトリは HTML5, CSS3, JavaScript(ES2015 以降) の学習用リポジトリです。",
   "browserslist": "> 0.5%, last 2 versions, not dead",
-  "source": "./index.html",
+  "source": "./work/index.html",
   "scripts": {
     "start": "parcel",
     "build": "parcel build index.html",
