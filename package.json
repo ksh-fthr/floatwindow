@@ -2,24 +2,10 @@
   "name": "html-javascript-work",
   "version": "1.0.0",
   "description": "本リポジトリは HTML5, CSS3, JavaScript(ES2015 以降) の学習用リポジトリです。",
-  "dependencies": {
-    "karma": "6.4.1"
-  },
-  "devDependencies": {
-    "eslint": "8.29.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "jasmine-core": "3.99.1",
-    "karma-chrome-launcher": "3.1.1",
-    "karma-firefox-launcher": "2.1.2",
-    "karma-html2js-preprocessor": "1.1.0",
-    "karma-jasmine": "4.0.2",
-    "parcel": "latest"
-  },
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "source": "./index.html",
   "scripts": {
-    "start": "parcel index.html",
+    "start": "parcel",
     "build": "parcel build index.html",
     "test-prepare": "bash ./prepareTest.sh",
     "test:ch": "karma start --browsers Chrome",
@@ -35,5 +21,21 @@
   "bugs": {
     "url": "https://github.com/ksh-fthr/html-javascript-work/issues"
   },
-  "homepage": "https://github.com/ksh-fthr/html-javascript-work#readme"
+  "homepage": "https://github.com/ksh-fthr/html-javascript-work#readme",
+  "dependencies": {
+    "karma": "6.4.1"
+  },
+  "devDependencies": {
+    "eslint": "8.29.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "jasmine-core": "3.99.1",
+    "karma-chrome-launcher": "3.1.1",
+    "karma-firefox-launcher": "2.1.2",
+    "karma-html2js-preprocessor": "1.1.0",
+    "karma-jasmine": "4.0.2",
+    "parcel": "latest"
+  }
 }
