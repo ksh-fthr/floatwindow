@@ -39,8 +39,22 @@ body {
 
 .contents-grid {
   display: grid;
+  /**
+   * 上端下端を含めて 1,2,3,4 つのラインが引かれる
+   * 各行では上端, 下端を含めて次のように指定する
+   * - 上端から 1 行指定: grid-row: 1/2;
+   * - 上端 2 行目から 1 行指定: grid-row: 2/3;
+   * - 上端 3 行目から下端まで指定: grid-row: 3/4;
+   */
   grid-template-rows: 150px 150px auto;
-  grid-template-columns: 140px 250px 140px 250px 140px 250px;
+  /**
+   * 左端右端を含めて 1,2,3,4,5,6,7 つのラインが引かれる
+   * 各セルでは左端, 右端を含めて次のように指定する
+   * - 左端から 1 セル指定: grid-column: 1/2;
+   * - 左端 2 セル目から 1 セル指定: grid-column: 2/3;
+   * - 左端 3 セル目から右端まで指定: grid-column: 3/7;
+   **/
+  grid-template-columns: 160px 250px 160px 250px 160px 250px;
   grid-row-gap: 20px;
   grid-column-gap: 10px;
 }
@@ -57,30 +71,63 @@ body {
 /**
  * Grid-上段
  */
-/* 左 */
-.content-row-top.content-column-left-label {
+/* 左-見出し, 見出し前マーク, 入力ボックス */
+.content-row-top.column-left-label {
   grid-column: 1/2;
   grid-row: 1/2;
+  position: relative;
+  padding-left: 20px;
 }
-.content-row-top.content-column-left-input {
+.content-row-top.column-left-label::before {
+  position: absolute;
+  display: block;
+  top: 35px;
+  left: 5px;
+  height: 28px;
+  border-left: 5px solid #ff00ff;
+  content: '';
+}
+.content-row-top.column-left-input {
   grid-column: 2/3;
   grid-row: 1/2;
 }
-/* 中央 */
-.content-row-top.content-column-middle-label {
+/* 中央-見出し, 見出し前マーク, 入力ボックス */
+.content-row-top.column-middle-label {
   grid-column: 3/4;
   grid-row: 1/2;
+  position: relative;
+  padding-left: 20px;
 }
-.content-row-top.content-column-middle-input {
+.content-row-top.column-middle-label::before {
+  position: absolute;
+  display: block;
+  top: 35px;
+  left: 5px;
+  height: 28px;
+  border-left: 5px solid #ff00ff;
+  content: '';
+}
+.content-row-top.column-middle-input {
   grid-column: 4/5;
   grid-row: 1/2;
 }
-/* 右 */
-.content-row-top.content-column-right-label {
+/* 右-見出し, 見出し前マーク, 入力ボックス */
+.content-row-top.column-right-label {
   grid-column: 5/6;
   grid-row: 1/2;
+  position: relative;
+  padding-left: 20px;
 }
-.content-row-top.content-column-right-input {
+.content-row-top.column-right-label::before {
+  position: absolute;
+  display: block;
+  top: 35px;
+  left: 5px;
+  height: 28px;
+  border-left: 5px solid #ff00ff;
+  content: '';
+}
+.content-row-top.column-right-input {
   grid-column: 6/7;
   grid-row: 1/2;
 }
@@ -88,28 +135,61 @@ body {
 /**
  * Grid-中段
  */
-/* 左 */
+/* 左-見出し, 見出し前マーク, 入力ボックス */
 .content-row-middle.column-left-label {
   grid-column: 1/2;
   grid-row: 2/3;
+  position: relative;
+  padding-left: 20px;
+}
+.content-row-middle.column-left-label::before {
+  position: absolute;
+  display: block;
+  top: 35px;
+  left: 5px;
+  height: 28px;
+  border-left: 5px solid #ff00ff;
+  content: '';
 }
 .content-row-middle.column-left-input {
   grid-column: 2/3;
   grid-row: 2/3;
 }
-/* 中央 */
+/* 中央-見出し, 見出し前マーク, 入力ボックス */
 .content-row-middle.column-middle-label {
   grid-column: 3/4;
   grid-row: 2/3;
+  position: relative;
+  padding-left: 20px;
+}
+.content-row-middle.column-middle-label::before {
+  position: absolute;
+  display: block;
+  top: 35px;
+  left: 5px;
+  height: 28px;
+  border-left: 5px solid #ff00ff;
+  content: '';
 }
 .content-row-middle.column-middle-input {
   grid-column: 4/5;
   grid-row: 2/3;
 }
-/* 右 */
+/* 右-見出し, 見出し前マーク, 入力ボックス */
 .content-row-middle.column-right-label {
   grid-column: 5/6;
   grid-row: 2/3;
+  position: relative;
+  padding-left: 20px;
+}
+.content-row-middle.column-right-label::before {
+  position: absolute;
+  display: block;
+  top: 35px;
+  left: 5px;
+  height: 28px;
+  border-left: 5px solid #ff00ff;
+  content: '';
 }
 .content-row-middle.column-right-input {
   grid-column: 6/7;
@@ -119,19 +199,41 @@ body {
 /**
  * Grid-下段
  */
-/* 左 */
+/* 左-見出し, 見出し前マーク, 入力エリア */
 .content-row-bottom.column-left-label {
   grid-column: 1/2;
   grid-row: 3/4;
+  position: relative;
+  padding-left: 20px;
+}
+.content-row-bottom.column-left-label::before {
+  position: absolute;
+  display: block;
+  top: 35px;
+  left: 5px;
+  height: 28px;
+  border-left: 5px solid #ff00ff;
+  content: '';
 }
 .content-row-bottom.column-left-input {
   grid-column: 2/4;
   grid-row: 3/4;
 }
-/* 右 */
+/* 左-見出し, 見出し前マーク, 入力エリア */
 .content-row-bottom.column-right-label {
   grid-column: 4/5;
   grid-row: 3/4;
+  position: relative;
+  padding-left: 20px;
+}
+.content-row-bottom.column-right-label::before {
+  position: absolute;
+  display: block;
+  top: 35px;
+  left: 5px;
+  height: 28px;
+  border-left: 5px solid #ff00ff;
+  content: '';
 }
 .content-row-bottom.column-right-input {
   grid-column: 5/7;
