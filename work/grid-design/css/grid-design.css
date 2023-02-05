@@ -156,7 +156,7 @@ body {
 /**
  * Grid-中段
  */
-/* 中断: キャプション */
+/* 中段: キャプション */
 .content-row-middle.row-caption {
   color: #778899;
   grid-column: 1/7;
@@ -228,7 +228,7 @@ body {
 /**
  * Grid-下段
  */
-/* 中断: キャプション */
+/* 下段: キャプション */
 .content-row-bottom.row-caption {
   color: #778899;
   grid-column: 1/7;
