@@ -7,7 +7,7 @@ html {
 
 body {
   width: 100%;
-  height: calc(100% - 80px);
+  height: 100%;
   margin: 0px;
   padding: 0px;
 }
@@ -27,7 +27,7 @@ body {
 }
 
 .contents {
-  height: inherit;
+  height: calc(100% - 80px);
   width: inherit;
   margin: 0px;
   padding: 0px;
@@ -38,6 +38,15 @@ body {
 }
 
 .contents-grid {
+  /**
+   * 全体の高さを指定した上で部品の高さを調整したいのでここで高さを指定する
+   * (ここで高さを指定しないと grid で指定する部品によって高さが決まってしまう)
+   */
+  height: inherit;
+
+  /**
+   * ここから grid の定義
+   */
   display: grid;
   /**
    * 上端下端を含めて 1,2,3,4 つのラインが引かれる
@@ -54,9 +63,11 @@ body {
    * - 左端 2 セル目から 1 セル指定: grid-column: 2/3;
    * - 左端 3 セル目から右端まで指定: grid-column: 3/7;
    **/
-  grid-template-columns: 160px 250px 160px 250px 160px 250px;
+  grid-template-columns: 180px 250px 180px 250px 180px 250px;
   grid-row-gap: 20px;
   grid-column-gap: 10px;
+
+  background: #faf0e6;
 }
 
 .content-row-top,
@@ -64,9 +75,9 @@ body {
 .content-row-bottom {
   display: flex;
   align-items: center;
-  height: 100px;
+  height: 100%;
+  border: dashed;
 }
-
 
 /**
  * Grid-上段
@@ -81,7 +92,7 @@ body {
 .content-row-top.column-left-label::before {
   position: absolute;
   display: block;
-  top: 35px;
+  top: 60px;
   left: 5px;
   height: 28px;
   border-left: 5px solid #ff00ff;
@@ -101,7 +112,7 @@ body {
 .content-row-top.column-middle-label::before {
   position: absolute;
   display: block;
-  top: 35px;
+  top: 60px;
   left: 5px;
   height: 28px;
   border-left: 5px solid #ff00ff;
@@ -121,7 +132,7 @@ body {
 .content-row-top.column-right-label::before {
   position: absolute;
   display: block;
-  top: 35px;
+  top: 60px;
   left: 5px;
   height: 28px;
   border-left: 5px solid #ff00ff;
@@ -145,7 +156,7 @@ body {
 .content-row-middle.column-left-label::before {
   position: absolute;
   display: block;
-  top: 35px;
+  top: 60px;
   left: 5px;
   height: 28px;
   border-left: 5px solid #ff00ff;
@@ -165,7 +176,7 @@ body {
 .content-row-middle.column-middle-label::before {
   position: absolute;
   display: block;
-  top: 35px;
+  top: 60px;
   left: 5px;
   height: 28px;
   border-left: 5px solid #ff00ff;
@@ -185,7 +196,7 @@ body {
 .content-row-middle.column-right-label::before {
   position: absolute;
   display: block;
-  top: 35px;
+  top: 60px;
   left: 5px;
   height: 28px;
   border-left: 5px solid #ff00ff;
@@ -209,7 +220,7 @@ body {
 .content-row-bottom.column-left-label::before {
   position: absolute;
   display: block;
-  top: 35px;
+  top: 105px;
   left: 5px;
   height: 28px;
   border-left: 5px solid #ff00ff;
@@ -229,7 +240,7 @@ body {
 .content-row-bottom.column-right-label::before {
   position: absolute;
   display: block;
-  top: 35px;
+  top: 105px;
   left: 5px;
   height: 28px;
   border-left: 5px solid #ff00ff;
@@ -244,18 +255,14 @@ body {
  * Grid 以外のセレクタ
  */
 .type-input-box {
-  width: 190px;
-  max-width: 190px;
-  min-width: 190px;
+  width: 100%;
   height: 30px;
   border: solid 1px #000000;
 }
 
 .type-textarea {
   resize: none;
-  width: 340px;
-  max-width: 340px;
-  min-width: 340px;
+  width: 100%;
   height: inherit;
   border: solid 1px #000000;
 }
