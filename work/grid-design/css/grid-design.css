@@ -6,8 +6,8 @@ html {
 }
 
 body {
+  body: 100%;
   width: 100%;
-  height: 100%;
   margin: 0px;
   padding: 0px;
 }
@@ -28,7 +28,7 @@ body {
 
 .contents {
   height: calc(100% - 80px);
-  width: inherit;
+  width: 100%;
   margin: 0px;
   padding: 0px;
 
@@ -49,13 +49,13 @@ body {
    */
   display: grid;
   /**
-   * 上端下端を含めて 1,2,3,4 つのラインが引かれる
+   * 上端下端を含めて 1,2,3,4,5,6,7 つのラインが引かれる
    * 各行では上端, 下端を含めて次のように指定する
    * - 上端から 1 行指定: grid-row: 1/2;
    * - 上端 2 行目から 1 行指定: grid-row: 2/3;
-   * - 上端 3 行目から下端まで指定: grid-row: 3/4;
+   * - 上端 N 行目から下端まで指定: grid-row: N/4;
    */
-  grid-template-rows: 150px 150px auto;
+  grid-template-rows: 90px 80px 90px 80px 90px auto;
   /**
    * 左端右端を含めて 1,2,3,4,5,6,7 つのラインが引かれる
    * 各セルでは左端, 右端を含めて次のように指定する
@@ -67,7 +67,7 @@ body {
   grid-row-gap: 20px;
   grid-column-gap: 10px;
 
-  background: #faf0e6;
+  background: #fffafa;
 }
 
 .content-row-top,
@@ -79,23 +79,30 @@ body {
   display: flex;
   align-items: center;
   height: 100%;
-  border: dashed;
 }
 
 /**
  * Grid-上段
  */
+/* 上段: キャプション */
+.content-row-top.row-caption {
+  color: #778899;
+  grid-column: 1/7;
+  grid-row: 1/2;
+  padding: 10px;
+  border-top: solid #b0c4de;
+}
 /* 左-見出し, 見出し前マーク, 入力ボックス */
 .content-row-top.column-left-label {
   grid-column: 1/2;
-  grid-row: 1/2;
+  grid-row: 2/3;
   position: relative;
   padding-left: 20px;
 }
 .content-row-top.column-left-label::before {
   position: absolute;
   display: block;
-  top: 60px;
+  top: 25px;
   left: 5px;
   height: 28px;
   border-left: 5px solid #ff00ff;
@@ -103,19 +110,19 @@ body {
 }
 .content-row-top.column-left-input {
   grid-column: 2/3;
-  grid-row: 1/2;
+  grid-row: 2/3;
 }
 /* 中央-見出し, 見出し前マーク, 入力ボックス */
 .content-row-top.column-middle-label {
   grid-column: 3/4;
-  grid-row: 1/2;
+  grid-row: 2/3;
   position: relative;
   padding-left: 20px;
 }
 .content-row-top.column-middle-label::before {
   position: absolute;
   display: block;
-  top: 60px;
+  top: 25px;
   left: 5px;
   height: 28px;
   border-left: 5px solid #ff00ff;
@@ -123,19 +130,19 @@ body {
 }
 .content-row-top.column-middle-input {
   grid-column: 4/5;
-  grid-row: 1/2;
+  grid-row: 2/3;
 }
 /* 右-見出し, 見出し前マーク, 入力ボックス */
 .content-row-top.column-right-label {
   grid-column: 5/6;
-  grid-row: 1/2;
+  grid-row: 2/3;
   position: relative;
   padding-left: 20px;
 }
 .content-row-top.column-right-label::before {
   position: absolute;
   display: block;
-  top: 60px;
+  top: 25px;
   left: 5px;
   height: 28px;
   border-left: 5px solid #ff00ff;
@@ -143,23 +150,31 @@ body {
 }
 .content-row-top.column-right-input {
   grid-column: 6/7;
-  grid-row: 1/2;
+  grid-row: 2/3;
 }
 
 /**
  * Grid-中段
  */
+/* 中断: キャプション */
+.content-row-middle.row-caption {
+  color: #778899;
+  grid-column: 1/7;
+  grid-row: 3/4;
+  padding: 10px;
+  border-top: solid #b0c4de;
+}
 /* 左-見出し, 見出し前マーク, 入力ボックス */
 .content-row-middle.column-left-label {
   grid-column: 1/2;
-  grid-row: 2/3;
+  grid-row: 4/5;
   position: relative;
   padding-left: 20px;
 }
 .content-row-middle.column-left-label::before {
   position: absolute;
   display: block;
-  top: 60px;
+  top: 25px;
   left: 5px;
   height: 28px;
   border-left: 5px solid #ff00ff;
@@ -167,19 +182,19 @@ body {
 }
 .content-row-middle.column-left-input {
   grid-column: 2/3;
-  grid-row: 2/3;
+  grid-row: 4/5;
 }
 /* 中央-見出し, 見出し前マーク, 入力ボックス */
 .content-row-middle.column-middle-label {
   grid-column: 3/4;
-  grid-row: 2/3;
+  grid-row: 4/5;
   position: relative;
   padding-left: 20px;
 }
 .content-row-middle.column-middle-label::before {
   position: absolute;
   display: block;
-  top: 60px;
+  top: 25px;
   left: 5px;
   height: 28px;
   border-left: 5px solid #ff00ff;
@@ -187,19 +202,19 @@ body {
 }
 .content-row-middle.column-middle-input {
   grid-column: 4/5;
-  grid-row: 2/3;
+  grid-row: 4/5;
 }
 /* 右-見出し, 見出し前マーク, 入力ボックス */
 .content-row-middle.column-right-label {
   grid-column: 5/6;
-  grid-row: 2/3;
+  grid-row: 4/5;
   position: relative;
   padding-left: 20px;
 }
 .content-row-middle.column-right-label::before {
   position: absolute;
   display: block;
-  top: 60px;
+  top: 25px;
   left: 5px;
   height: 28px;
   border-left: 5px solid #ff00ff;
@@ -207,23 +222,31 @@ body {
 }
 .content-row-middle.column-right-input {
   grid-column: 6/7;
-  grid-row: 2/3;
+  grid-row: 4/5;
 }
 
 /**
  * Grid-下段
  */
+/* 中断: キャプション */
+.content-row-bottom.row-caption {
+  color: #778899;
+  grid-column: 1/7;
+  grid-row: 5/6;
+  padding: 10px;
+  border-top: solid #b0c4de;
+}
 /* 左-見出し, 見出し前マーク, 入力エリア */
 .content-row-bottom.column-left-label {
   grid-column: 1/2;
-  grid-row: 3/4;
+  grid-row: 6/7;
   position: relative;
   padding-left: 20px;
 }
 .content-row-bottom.column-left-label::before {
   position: absolute;
   display: block;
-  top: 105px;
+  top: 40px;
   left: 5px;
   height: 28px;
   border-left: 5px solid #ff00ff;
@@ -231,19 +254,19 @@ body {
 }
 .content-row-bottom.column-left-input {
   grid-column: 2/4;
-  grid-row: 3/4;
+  grid-row: 6/7;
 }
 /* 左-見出し, 見出し前マーク, 入力エリア */
 .content-row-bottom.column-right-label {
   grid-column: 4/5;
-  grid-row: 3/4;
+  grid-row: 6/7;
   position: relative;
   padding-left: 20px;
 }
 .content-row-bottom.column-right-label::before {
   position: absolute;
   display: block;
-  top: 105px;
+  top: 40px;
   left: 5px;
   height: 28px;
   border-left: 5px solid #ff00ff;
@@ -251,7 +274,7 @@ body {
 }
 .content-row-bottom.column-right-input {
   grid-column: 5/7;
-  grid-row: 3/4;
+  grid-row: 6/7;
 }
 
 /**
@@ -266,7 +289,7 @@ body {
 .type-textarea {
   resize: none;
   width: 100%;
-  height: inherit;
+  height: 100px;
   border: solid 1px #000000;
 }
 
