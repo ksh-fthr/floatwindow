@@ -73,6 +73,9 @@ body {
 .content-row-top,
 .content-row-middle,
 .content-row-bottom {
+  /**
+   * display: flex; と align-items: center; で子要素を上下中央に揃える
+   */
   display: flex;
   align-items: center;
   height: 100%;
