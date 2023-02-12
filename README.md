@@ -12,17 +12,19 @@
 | npm          | v9.4.0     | バージョンは `npm --version` で確認      |
 | Parcel       | v2.8.1     | バージョンは `npm list --depth=0` で確認 |
 | Tailwind CSS | v3.2.6     | 同上                                     |
+| PostCSS      | v8.4.21    | 同上                                     |
 
 <details>
 <summary>パッケージの確認</summary>
 
 ```bash
 % npm list --depth=0
+html-javascript-work@1.0.0 /path/to/html-javascript-work
 ├── eslint-config-standard@17.0.0
 ├── eslint-plugin-import@2.26.0
 ├── eslint-plugin-node@11.1.0
 ├── eslint-plugin-promise@6.1.1
-├── eslint@8.33.0
+├── eslint@8.34.0
 ├── jasmine-core@3.99.1
 ├── karma-chrome-launcher@3.1.1
 ├── karma-firefox-launcher@2.1.2
@@ -30,6 +32,7 @@
 ├── karma-jasmine@4.0.2
 ├── karma@6.4.1
 ├── parcel@2.8.1
+├── postcss@8.4.21
 └── tailwindcss@3.2.6
 ```
 
@@ -40,7 +43,9 @@
   - 動的にフロートウィンドウを生成する実装を試すサンプルプログラムです
 - グリッドレイアウトの学習
   - [グリッドレイアウト](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout) の概念を学習するためのサンプルプログラムです
-
+- Tailwind CSS の学習
+  - [Tailwind CSS](https://tailwindcss.com/) を学習するためのサンプルプログラムです
+  - 本 PJ では Parcel でビルドしているので、公式の手順 - [Install Tailwind CSS with Parcel](https://tailwindcss.com/docs/guides/parcel) にのっとり Tailwind CSS を導入しました
 
 # 本リポジトリの内容の確認について
 本リポジトリではバンドラーに [Parcel](https://ja.parceljs.org/) を使用しています。
