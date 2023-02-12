@@ -36,6 +36,7 @@
     "karma-firefox-launcher": "2.1.2",
     "karma-html2js-preprocessor": "1.1.0",
     "karma-jasmine": "4.0.2",
-    "parcel": "latest"
+    "parcel": "latest",
+    "tailwindcss": "^3.2.6"
   }
 }
