@@ -5,11 +5,76 @@
     <meta charset='utf-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='./css/use-tailwind.css'>
+    <!-- Tailwind で Tab 実装のために Tailwind Elements を CDN で利用する( https://tailwind-elements.com/ ) -->
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
   </head>
   <body>
-    <h1 class="text-2xl font-bold underline"> Hello world! (Tailwind CSS) </h1>
-    <h1 class="text-4xl font-bold underline"> Hello world! (Tailwind CSS) </h1>
-    <h1> Hello world! (no style) </h1>
+    <!-- Tabs navigation -->
+    <ul
+      class="mb-5 flex list-none flex-col flex-wrap border-b-0 pl-0 md:flex-row"
+      role="tablist"
+      data-te-nav-ref
+    >
+      <li role="presentation">
+        <a
+          href="#tabs-home"
+          class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+          data-te-toggle="pill"
+          data-te-target="#tabs-home"
+          data-te-nav-active
+          role="tab"
+          aria-controls="tabs-home"
+          aria-selected="true"
+        >
+          文字サイズの調整
+        </a>
+      </li>
+      <li role="presentation">
+        <a
+          href="#tabs-profile"
+          class="focus:border-transparen my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+          data-te-toggle="pill"
+          data-te-target="#tabs-profile"
+          role="tab"
+          aria-controls="tabs-profile"
+          aria-selected="false"
+        >
+          グリッド
+        </a>
+      </li>
+    </ul>
+
+    <!--Tabs content-->
+    <div class="mb-6">
+      <div
+        class="hidden opacity-0 opacity-100 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
+        id="tabs-home"
+        role="tabpanel"
+        aria-labelledby="tabs-home-tab"
+        data-te-tab-active
+      >
+        <h1 class="text-2xl font-bold underline"> Hello world! (Tailwind CSS) </h1>
+        <h1 class="text-4xl font-bold underline"> Hello world! (Tailwind CSS) </h1>
+        <h1> Hello world! (no style) </h1>
+      </div>
+      <div
+        class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
+        id="tabs-profile"
+        role="tabpanel"
+        aria-labelledby="tabs-profile-tab"
+      >
+        <div class="grid grid-cols-4 gap-4 bg-indigo-100">
+          <div>01</div>
+          <div>02</div>
+          <div>03</div>
+          <div>04</div>
+          <div>05</div>
+          <div>06</div>
+          <div>07</div>
+          <div>08</div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
 
