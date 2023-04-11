@@ -5,8 +5,9 @@
     <meta charset='utf-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='./css/use-tailwind.css'>
-    <!-- Tailwind で Tab 実装のために Tailwind Elements を CDN で利用する( https://tailwind-elements.com/ ) -->
-    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    <!-- `Browser scripts cannot have imports or exports` に対応するために `type="module"` が必要. -->
+    <!-- 参考: https://github.com/parcel-bundler/parcel/discussions/6490 -->
+    <script type="module" src="./use-tailwind.js"></script>
   </head>
   <body>
     <!-- Tabs navigation -->
