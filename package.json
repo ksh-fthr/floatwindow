@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/ksh-fthr/html-javascript-work#readme",
   "dependencies": {
-    "karma": "6.4.1",
+    "karma": "6.4.2",
     "tw-elements": "^1.0.0-beta1"
   },
   "devDependencies": {
